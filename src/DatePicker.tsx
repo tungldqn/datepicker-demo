@@ -9,6 +9,7 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import React, { useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import moment from "moment";
+import { vi } from "date-fns/locale";
 
 const DatePicker = () => {
   const [openPicker, setOpenPicker] = React.useState<boolean>(false);
@@ -44,18 +45,19 @@ const DatePicker = () => {
         },
       }}
     >
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterDateFns} locale={vi}>
         <DateRangePicker
           calendars={1}
           onClose={() => setOpenPicker(false)}
           open={openPicker}
-          startText=""
-          endText=""
           value={dateRange}
-          disableCloseOnSelect
+          // disableCloseOnSelect
           onChange={(newValue) => {
             setDateRange(newValue);
           }}
+          showToolbar={false}
+          cancelText=""
+          okText=""
           disableFuture
           clearable
           renderInput={() => (
